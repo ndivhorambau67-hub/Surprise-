@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Special Question</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      background: #fff;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 360px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 40px;
+    }
+
+    button {
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 16px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background: #f1f1f1;
+      color: #333;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -40px;
+      font-size: 22px;
+      animation: floatUp 4s linear forwards;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+
+    /* 🚫 Desktop Block */
+    @media (min-width: 768px) {
+      body {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1 id="question">💖 Hey Simphiwe, will you be my Valentine? 💖</h1>
+
+    <button id="yesBtn" onclick="yesClicked()">Yes 😊</button>
+    <button id="noBtn" onclick="alert('Nice try 😌')">No 💛</button>
+  </div>
+
+  <script>
+    let yesCount = 0;
+    let scale = 1;
+
+    function yesClicked() {
+      if (yesCount >= 7) return;
+
+      yesCount++;
+      scale += 0.15;
+
+      document.getElementById("yesBtn").style.transform =
+        "scale(" + scale + ")";
+
+      if (yesCount < 7) {
+        document.getElementById("question").innerText =
+          "😉 Almost there… tap YES " + (7 - yesCount) + " more times!";
+      } else {
+        document.getElementById("question").innerText =
+          "I knew you would say yes, Musadzi Wanga ♥️";
+        createHearts();
+      }
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random() * 2) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+      }
+    }
+  </script>
+
+</body>
+</html>
